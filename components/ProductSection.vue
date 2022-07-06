@@ -11,11 +11,10 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
-const { mapState, mapActions } = createNamespacedHelpers('products')
 export default {
-  name: 'ProductsPage',
+  name: 'ProductSection',
   async fetch () {
     try {
       await this.fetchProducts()
@@ -24,10 +23,14 @@ export default {
     }
   },
   computed: {
-    ...mapState(['products'])
+    ...mapState('products', {
+      products: state => state.products
+    })
   },
   methods: {
-    ...mapActions(['fetchProducts'])
+    ...mapActions('products', {
+      fetchProducts: 'fetchProducts'
+    })
   }
 }
 </script>

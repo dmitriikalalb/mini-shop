@@ -1,11 +1,19 @@
 <template lang="pug">
 .container
-  nuxt-link(to='/products') Products
+  el-row
+    nuxt-link(to="/cart")
+      el-button.round
+        i.el-icon-shopping-cart-1
+        | Корзина
+  product-section
 </template>
 
 <script>
-
+import ProductSection from '~/components/ProductSection'
 export default {
-  name: 'IndexPage'
+  name: 'ProductsPage',
+  components: {
+    ProductSection
+  }
 }
 </script>
