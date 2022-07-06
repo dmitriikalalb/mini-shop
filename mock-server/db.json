@@ -1,0 +1,70 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Спорт"
+    },
+    {
+      "id": 2,
+      "name": "Автотовары"
+    },
+    {
+      "id": 3,
+      "name": "Книги"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "image": "Scooter.jpg",
+      "title": "Самокат",
+      "price": 25000,
+      "categoryID": 1
+    },
+    {
+      "id": 2,
+      "image": "Shoes.jpg",
+      "title": "Кроссовки",
+      "price": 3000,
+      "categoryID": 1
+    },
+    {
+      "id": 3,
+      "image": "Python.jpg",
+      "title": "Изучаем Python",
+      "price": 1330,
+      "categoryID": 3
+    },
+    {
+      "id": 4,
+      "image": "Pioneer.jpg",
+      "title": "Pioneer",
+      "price": 16000,
+      "categoryID": 2
+    },
+    {
+      "id": 5,
+      "image": "Oil.jpg",
+      "title": "Моторное масло",
+      "price": 4300,
+      "categoryID": 2
+    },
+    {
+      "id": 6,
+      "image": "ClearCode.jpg",
+      "title": "Чистый код",
+      "price": 1000,
+      "categoryID": 3
+    },
+    {
+      "id": 7,
+      "image": "Java.jpg",
+      "title": "Изучаем Java",
+      "price": 1500,
+      "categoryID": 3
+    }
+  ],
+  "cart": [
+    {}
+  ]
+}
