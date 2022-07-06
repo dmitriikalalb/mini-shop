@@ -18,12 +18,15 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/index.css',
+    '~assets/scss/main.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '~/plugins/api-client.js',
+    '~/repositories/index.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -37,10 +40,21 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios'
   ],
+
+  axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/]
-  }
+  },
+
+  env: {
+    API_URL: process.env.API_URL || 'http://localhost:3000/api'
+  },
+
+  serverMiddleware: [
+    { path: '/api', handler: '~/mock-server/index.js' }
+  ]
 }
