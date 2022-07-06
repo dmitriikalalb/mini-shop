@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ProductSection from '~/components/ProductSection'
+import ProductSection from '~/components/HomePage/ProductSection'
 export default {
   name: 'ProductsPage',
   components: {

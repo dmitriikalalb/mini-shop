@@ -7,7 +7,8 @@
         div(style='padding: 14px;')
           span {{ product.title }}
           .price ₽{{ product.price }}
-          el-button.button(type='text') Добавить в корзину
+          el-button.button(v-if="isProductOnCart(product.id)" @click="addToCart(product)") Добавить в корзину
+          el-button.button(v-else @click="removeProduct(product.id)") Удалить из корзины
 </template>
 
 <script>
@@ -25,12 +26,28 @@ export default {
   computed: {
     ...mapState('products', {
       products: state => state.products
+    }),
+    ...mapState('cart', {
+      cart: state => state.cart
     })
   },
   methods: {
     ...mapActions('products', {
       fetchProducts: 'fetchProducts'
-    })
+    }),
+    ...mapActions('cart', {
+      setCart: 'setCart',
+      removeCartProduct: 'removeCartProduct'
+    }),
+    addToCart (product) {
+      this.setCart(product)
+    },
+    removeProduct (id) {
+      this.removeCartProduct(id)
+    },
+    isProductOnCart (id) {
+      return this.cart.filter(product => product.id === id).length === 0
+    }
   }
 }
 </script>

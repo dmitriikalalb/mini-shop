@@ -26,7 +26,8 @@ export default {
   plugins: [
     '@/plugins/element-ui',
     '~/plugins/api-client.js',
-    '~/repositories/index.js'
+    '~/repositories/index.js',
+    { src: '~/plugins/vuex-persistedstate.js', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
