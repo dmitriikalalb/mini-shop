@@ -1,0 +1,26 @@
+version: '3'
+networks:
+  net:
+    external: true
+services:
+  mock-api:
+    container_name: mock-api
+    build: ./mock-server
+    ports: 
+      - 8081:3000
+    expose:
+      - 3000
+    environment:
+      - VIRTUAL_HOST=api.mock.local
+      - VIRTUAL_PORT=3000
+    networks:
+      - net
+  proxy: 
+    container_name: proxy 
+    image: jwilder/nginx-proxy:alpine 
+    volumes: 
+      - /var/run/docker.sock:/tmp/docker.sock:ro 
+    ports: 
+      - 80:80
+    networks:
+      - net
