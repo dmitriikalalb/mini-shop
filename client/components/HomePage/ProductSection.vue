@@ -16,7 +16,7 @@ import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'ProductSection',
-  async fetch () {
+  async mounted () {
     try {
       await this.fetchProducts()
     } catch (e) {

@@ -1,4 +1,5 @@
 export default {
+  target: 'static',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'mini-shop',
@@ -57,10 +58,10 @@ export default {
   },
 
   env: {
-    API_URL: process.env.API_URL || 'http://localhost:3000/api'
-  },
+    API_URL: process.env.API_URL || 'http://localhost:8081/'
+  }
 
-  serverMiddleware: [
-    { path: '/api', handler: '~/mock-server/index.js' }
-  ]
+  // serverMiddleware: [
+  //   { path: '/api', handler: '~/mock-server/index.js' }
+  // ]
 }
