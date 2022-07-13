@@ -93,6 +93,33 @@
 
 @media screen and (max-width: 435px) {
   .product-card {
-    flex-basis: 100%;
+    flex: 1 0 20%;
+    max-width: 115px;
+
+    &__quantity {
+      width: 30px;
+      height: 30px;
+      font-size: 15px;
+      transform: translate(10px, -10px) scale(1);
+    }
+
+    &__details {
+      padding: 0;
+    }
+
+    &__title {
+      font-size: 14px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    &__price, &__button {
+      font-size: 10px;
+    }
+
+    &__button {
+      padding: 12px !important;
+    }
   }
 }
