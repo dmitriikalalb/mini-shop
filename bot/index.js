@@ -1,15 +1,19 @@
-const { Telegraf } = require("telegraf");
+const { Telegraf, Markup } = require("telegraf")
 const token = '5420165182:AAGTtpV6KmglpWoSQZJ2OUFU3nk9ToWjNv0'
 const bot = new Telegraf(token)
 
-const web_link = "https://mock-api.test.ukrik.com/";
+const web_link = "https://mini-shop.test.ukrik.com/"
 
-bot.start((ctx) =>
-    ctx.reply("Добро пожаловать в мини-магазин", {
-        reply_markup: {
-            keyboard: [[{ text: "Веб приложение", web_app: { url: web_link } }]],
-        },
-    })
-);
+bot.start(async (ctx) => {
+  try {
+    await ctx.reply('Добро пожаловать в мини-магазин\n\nНажмите на кнопку чтобы сделать свой первый заказ 😊', Markup.inlineKeyboard(
+      [
+        [Markup.button.webApp('Магазин', web_link)]
+      ]
+    ))
+  } catch (e) {
+    console.error(e)
+  }
+})
 
-bot.launch();
+bot.launch()
