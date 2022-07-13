@@ -1,4 +1,6 @@
 @import "common";
+@import "product-card";
+@import "HomePage/product-section";
 
 /*Обнуление*/
 *{
@@ -25,6 +27,12 @@ html,body{
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
+
+body {
+  background-color: rgb(19, 19, 52);
+  color: #fff;
+}
+
 input,button,textarea{font-family:inherit;}
 
 input::-ms-clear{display: none;}
