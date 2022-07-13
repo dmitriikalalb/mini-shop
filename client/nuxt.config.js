@@ -58,10 +58,6 @@ export default {
   },
 
   env: {
-    API_URL: process.env.API_URL || 'http://localhost:8081/'
+    API_URL: process.env.API_URL || 'https://mock-api.test.ukrik.com/'
   }
-
-  // serverMiddleware: [
-  //   { path: '/api', handler: '~/mock-server/index.js' }
-  // ]
 }
