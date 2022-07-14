@@ -34,6 +34,7 @@ export default {
   async mounted () {
     try {
       this.telegram = window.Telegram.WebApp
+      this.mainBtnInit()
       this.telegram.MainButton.onClick(this.goToCart)
       await this.fetchProducts()
     } catch (e) {
