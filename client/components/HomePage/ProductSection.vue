@@ -15,16 +15,28 @@ export default {
   },
   data () {
     return {
-      count: 0
+      telegram: null
     }
   },
   computed: {
     ...mapState('products', {
       products: state => state.products
+    }),
+    ...mapState('cart', {
+      cart: state => state.cart
     })
+  },
+  watch: {
+    cart () {
+      this.mainBtnInit()
+    }
   },
   async mounted () {
     try {
+      this.telegram = window.Telegram.WebApp
+      this.mainBtnInit()
+      this.telegram.BackButton.hide()
+      this.telegram.MainButton.onClick(this.goToCart)
       await this.fetchProducts()
     } catch (e) {
       throw new Error(e)
@@ -33,7 +45,17 @@ export default {
   methods: {
     ...mapActions('products', {
       fetchProducts: 'fetchProducts'
-    })
+    }),
+    mainBtnInit () {
+      this.telegram.MainButton.setParams({
+        text: 'Посмотреть заказ',
+        color: '#5CB87A',
+        is_visible: Boolean(this.cart.length > 0)
+      })
+    },
+    goToCart () {
+      this.$router.push('/cart')
+    }
   }
 }
 </script>

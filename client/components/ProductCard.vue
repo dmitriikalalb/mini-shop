@@ -7,8 +7,8 @@ el-card.product-card
     p.product-card__price ₽{{ product.price }}
     el-button.product-card__button(v-if="isProductOnCart(product.id) === 0" type="warning" icon='el-icon-shopping-cart-1' @click="addToCart(product)" round) Купить
     .product-card__buttons(v-else)
-      el-button.product-card__button(type="warning" icon='el-icon-plus' @click="increment(product)" round)
-      el-button.product-card__button(type="danger" icon='el-icon-minus' @click="decrement(product)" round)
+      el-button.product-card__button(type="warning" icon='el-icon-plus' @click="calc(product, 'increment')" round)
+      el-button.product-card__button(type="danger" icon='el-icon-minus' @click="calc(product, 'decrement')" round)
 </template>
 
 <script>
@@ -36,17 +36,19 @@ export default {
     addToCart (product) {
       this.setCart(product)
     },
-    increment (product) {
+    calc (product, operation) {
+      let newQuantity
       const quantity = this.isProductOnCart(product.id)
-      const newQuantity = parseInt(quantity) + 1
-      this.editProductQuantity({
-        ...product,
-        quantity: newQuantity
-      })
-    },
-    decrement (product) {
-      const quantity = this.isProductOnCart(product.id)
-      const newQuantity = parseInt(quantity) - 1
+      switch (operation) {
+        case 'increment':
+          newQuantity = quantity + 1
+          break
+        case 'decrement':
+          newQuantity = quantity - 1
+          break
+        default:
+          return
+      }
       this.editProductQuantity({
         ...product,
         quantity: newQuantity
@@ -57,11 +59,7 @@ export default {
     },
     isProductOnCart (id) {
       const product = this.cart.find(product => product.id === id)
-      if (product) {
-        return product.quantity
-      } else {
-        return 0
-      }
+      return (product ? product.quantity : 0)
     }
   }
 }

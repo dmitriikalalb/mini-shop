@@ -6,6 +6,11 @@
   flex-direction: column;
 }
 
+.el-card {
+  overflow: visible;
+  background: transparent;
+}
+
 @media screen and (max-width: 1400px) {
   .container {
     max-width: 960px;
