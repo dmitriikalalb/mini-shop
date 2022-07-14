@@ -1,7 +1,7 @@
 <template lang="pug">
 el-row(:gutter="5")
   el-col.product-section(v-for="product in products" :key="product.id" :span="8")
-    product-card(:product="product" @productClick="toCheckout")
+    product-card(:product="product")
 </template>
 
 <script>
@@ -26,16 +26,16 @@ export default {
       cart: state => state.cart
     })
   },
+  watch: {
+    cart () {
+      this.mainBtnInit()
+    }
+  },
   async mounted () {
     try {
       this.telegram = window.Telegram.WebApp
-      this.telegram.MainButton.text = 'Продолжить'
-      this.telegram.MainButton.color = '#5CB87A'
-      this.telegram.MainButton.onClick(() => {
-        this.$router.push('/cart')
-      })
+      this.telegram.MainButton.onClick(this.goToCart)
       await this.fetchProducts()
-      await this.toCheckout()
     } catch (e) {
       throw new Error(e)
     }
@@ -44,12 +44,15 @@ export default {
     ...mapActions('products', {
       fetchProducts: 'fetchProducts'
     }),
-    toCheckout () {
-      if (this.cart.length > 0) {
-        this.telegram.MainButton.show()
-      } else {
-        this.telegram.MainButton.hide()
-      }
+    mainBtnInit () {
+      this.telegram.MainButton.setParams({
+        text: 'Посмотреть заказ',
+        color: '#5CB87A',
+        is_visible: Boolean(this.cart.length > 0)
+      })
+    },
+    goToCart () {
+      this.$router.push('/cart')
     }
   }
 }

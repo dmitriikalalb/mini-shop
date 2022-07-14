@@ -1,11 +1,13 @@
 <template lang="pug">
 .container
-  h1 This is cart page !!!
+  cart-section
 </template>
 
 <script>
+import CartSection from '~/components/CartPage/CartSection'
 export default {
-  name: 'CartPage'
+  name: 'CartPage',
+  components: { CartSection }
 }
 </script>
 
