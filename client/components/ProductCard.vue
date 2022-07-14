@@ -35,6 +35,7 @@ export default {
     }),
     addToCart (product) {
       this.setCart(product)
+      this.$emit('productClick')
     },
     increment (product) {
       const quantity = this.isProductOnCart(product.id)
@@ -43,6 +44,7 @@ export default {
         ...product,
         quantity: newQuantity
       })
+      this.$emit('productClick')
     },
     decrement (product) {
       const quantity = this.isProductOnCart(product.id)
@@ -54,6 +56,7 @@ export default {
       if (newQuantity === 0) {
         this.removeCartProduct(product.id)
       }
+      this.$emit('productClick')
     },
     isProductOnCart (id) {
       const product = this.cart.find(product => product.id === id)
