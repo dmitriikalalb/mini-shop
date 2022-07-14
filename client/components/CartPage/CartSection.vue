@@ -33,6 +33,9 @@ export default {
   mounted () {
     this.telegram = window.Telegram.WebApp
     this.telegram.BackButton.show()
+    this.telegram.BackButton.onClick(() => {
+      this.$router.push('/')
+    })
     this.telegram.MainButton.setParams({
       text: `Оплатить ₽${this.getTotalPrice()}`,
       color: '#5CB87A',

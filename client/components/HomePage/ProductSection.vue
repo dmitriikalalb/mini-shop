@@ -35,6 +35,7 @@ export default {
     try {
       this.telegram = window.Telegram.WebApp
       this.mainBtnInit()
+      this.telegram.BackButton.hide()
       this.telegram.MainButton.onClick(this.goToCart)
       await this.fetchProducts()
     } catch (e) {
