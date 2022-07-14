@@ -1,0 +1,38 @@
+version: '3'
+networks:
+  net:
+    external: true
+services:
+  mock-api:
+    container_name: mock-api
+    build: ./mock-server
+    ports:
+      - 8081:3000
+    expose:
+      - 3000
+    environment:
+      - VIRTUAL_HOST=mock-api.test.ukrik.com
+      - VIRTUAL_PORT=3000
+      - LETSENCRYPT_HOST=mock-api.test.ukrik.com
+      - LETSENCRYPT_EMAIL=info@ukrik.com
+    networks:
+      - net
+  mini-shop-client:
+    container_name: mini-shop-client
+    build: ./client
+    ports:
+      - 8080:80
+    expose:
+      - 80
+    environment:
+      - VIRTUAL_HOST=mini-shop.test.ukrik.com
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=mini-shop.test.ukrik.com
+      - LETSENCRYPT_EMAIL=info@ukrik.com
+    networks:
+      - net
+  bot:
+    container_name: bot
+    build: ./bot
+    networks:
+      - net

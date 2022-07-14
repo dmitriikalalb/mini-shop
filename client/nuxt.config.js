@@ -1,4 +1,5 @@
 export default {
+  target: 'static',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'mini-shop',
@@ -13,6 +14,11 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      {
+        src: 'https://telegram.org/js/telegram-web-app.js'
+      }
     ]
   },
 
@@ -52,10 +58,6 @@ export default {
   },
 
   env: {
-    API_URL: process.env.API_URL || 'http://localhost:3000/api'
-  },
-
-  serverMiddleware: [
-    { path: '/api', handler: '~/mock-server/index.js' }
-  ]
+    API_URL: process.env.API_URL || 'https://mock-api.test.ukrik.com/'
+  }
 }
