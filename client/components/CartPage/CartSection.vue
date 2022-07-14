@@ -16,21 +16,39 @@ el-row.cart-section
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'CartSection',
+  data () {
+    return {
+      telegram: null
+    }
+  },
   computed: {
     ...mapState('cart', {
       cart: state => state.cart
     })
   },
+  mounted () {
+    this.telegram = window.Telegram.WebApp
+    this.telegram.BackButton.show()
+    this.telegram.MainButton.setParams({
+      text: `Оплатить ₽${this.getTotalPrice()}`,
+      color: '#5CB87A',
+      is_visible: Boolean(this.cart.length > 0)
+    })
+  },
   methods: {
-    ...mapActions('cart', {
-      removeCartProduct: 'removeCartProduct'
-    }),
-    removeProduct (id) {
-      this.removeCartProduct(id)
+    getTotalPrice () {
+      let total = 0
+      const cartProducts = this.cart
+      for (let i = 0; i < cartProducts.length; i++) {
+        const quantity = cartProducts[i].quantity
+        const price = cartProducts[i].price
+        total += price * quantity
+      }
+      return total
     }
   }
 }
