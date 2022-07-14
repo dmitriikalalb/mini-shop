@@ -1,5 +1,5 @@
 <template lang="pug">
-.product-card
+el-card.product-card
   span(:class='`${isProductOnCart(product.id) !== 0 ? "product-card__quantity" : "product-card__quantity--hidden"}`') {{ isProductOnCart(product.id) }}
   img.product-card__image(:src="require(`~/assets/img/${product.image}`)")
   .product-card__details

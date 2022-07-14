@@ -1,10 +1,7 @@
 <template lang="pug">
-.product-section
-  product-card(
-    v-for="product in products"
-    :key="product.id"
-    :product="product"
-  )
+el-row(:gutter="5")
+  el-col.product-section(v-for="product in products" :key="product.id" :span="8")
+    product-card(:product="product")
 </template>
 
 <script>
@@ -21,17 +18,17 @@ export default {
       count: 0
     }
   },
+  computed: {
+    ...mapState('products', {
+      products: state => state.products
+    })
+  },
   async mounted () {
     try {
       await this.fetchProducts()
     } catch (e) {
       throw new Error(e)
     }
-  },
-  computed: {
-    ...mapState('products', {
-      products: state => state.products
-    })
   },
   methods: {
     ...mapActions('products', {
