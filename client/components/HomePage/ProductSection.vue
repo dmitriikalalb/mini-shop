@@ -29,6 +29,11 @@ export default {
   async mounted () {
     try {
       this.telegram = window.Telegram.WebApp
+      this.telegram.MainButton.text = 'Продолжить'
+      this.telegram.MainButton.color = '#5CB87A'
+      this.telegram.MainButton.onClick(() => {
+        this.$router.push('/cart')
+      })
       await this.fetchProducts()
       await this.toCheckout()
     } catch (e) {
@@ -41,9 +46,7 @@ export default {
     }),
     toCheckout () {
       if (this.cart.length > 0) {
-        this.telegram.MainButton.text = 'Test :)'
         this.telegram.MainButton.show()
-        this.telegram.MainButton.onClick(this.$router.push('/cart'))
       } else {
         this.telegram.MainButton.hide()
       }
