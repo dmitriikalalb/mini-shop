@@ -1,5 +1,10 @@
 <template lang="pug">
 el-row(:gutter="5")
+  el-col
+    h3 Категории:
+    el-select(placeholder='Select' v-model="select" :change="setSelectedCategory()")
+      el-option(value='0' label="Все")
+      el-option(v-for="category in categories" :key="category.id" :label="category.name" :value="category.id")
   el-col.product-section(v-for="product in products" :key="product.id" :span="8")
     product-card(:product="product")
 </template>
@@ -15,15 +20,20 @@ export default {
   },
   data () {
     return {
-      telegram: null
+      telegram: null,
+      select: '0'
     }
   },
   computed: {
     ...mapState('products', {
-      products: state => state.products
+      products: state => state.products,
+      selectedCategory: state => state.selectedCategory
     }),
     ...mapState('cart', {
       cart: state => state.cart
+    }),
+    ...mapState('categories', {
+      categories: state => state.categories
     })
   },
   watch: {
@@ -38,13 +48,18 @@ export default {
       this.telegram.BackButton.hide()
       this.telegram.MainButton.onClick(this.goToCart)
       await this.fetchProducts()
+      await this.fetchCategories()
     } catch (e) {
       throw new Error(e)
     }
   },
   methods: {
     ...mapActions('products', {
-      fetchProducts: 'fetchProducts'
+      fetchProducts: 'fetchProducts',
+      setCategory: 'setCategory'
+    }),
+    ...mapActions('categories', {
+      fetchCategories: 'fetchCategories'
     }),
     mainBtnInit () {
       this.telegram.MainButton.setParams({
@@ -55,6 +70,10 @@ export default {
     },
     goToCart () {
       this.$router.push('/cart')
+    },
+    async setSelectedCategory () {
+      this.setCategory(parseInt(this.select))
+      await this.fetchProducts()
     }
   }
 }
