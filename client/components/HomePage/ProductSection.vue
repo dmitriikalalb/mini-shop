@@ -20,7 +20,7 @@ export default {
   },
   data () {
     return {
-      telegram: null,
+      // telegram: null,
       select: '0'
     }
   },
@@ -36,17 +36,17 @@ export default {
       categories: state => state.categories
     })
   },
-  watch: {
-    cart () {
-      this.mainBtnInit()
-    }
-  },
+  // watch: {
+  //   cart () {
+  //     this.mainBtnInit()
+  //   }
+  // },
   async mounted () {
     try {
-      this.telegram = window.Telegram.WebApp
-      this.mainBtnInit()
-      this.telegram.BackButton.hide()
-      this.telegram.MainButton.onClick(this.goToCart)
+      // this.telegram = window.Telegram.WebApp
+      // this.mainBtnInit()
+      // this.telegram.BackButton.hide()
+      // this.telegram.MainButton.onClick(this.goToCart)
       await this.fetchProducts()
       await this.fetchCategories()
     } catch (e) {
@@ -61,16 +61,16 @@ export default {
     ...mapActions('categories', {
       fetchCategories: 'fetchCategories'
     }),
-    mainBtnInit () {
-      this.telegram.MainButton.setParams({
-        text: 'Посмотреть заказ',
-        color: '#5CB87A',
-        is_visible: Boolean(this.cart.length > 0)
-      })
-    },
-    goToCart () {
-      this.$router.push('/cart')
-    },
+    // mainBtnInit () {
+    //   this.telegram.MainButton.setParams({
+    //     text: 'Посмотреть заказ',
+    //     color: '#5CB87A',
+    //     is_visible: Boolean(this.cart.length > 0)
+    //   })
+    // },
+    // goToCart () {
+    //   this.$router.push('/cart')
+    // },
     async setSelectedCategory () {
       this.setCategory(parseInt(this.select))
       await this.fetchProducts()
