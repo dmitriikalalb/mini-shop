@@ -17,8 +17,8 @@ services:
       - LETSENCRYPT_EMAIL=info@ukrik.com
     networks:
       - net
-  mshop-client:
-    container_name: mshop-client
+  mini-shop-client:
+    container_name: mini-shop-client
     build: ./client
     ports:
       - 8080:80
