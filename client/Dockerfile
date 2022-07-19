@@ -5,12 +5,19 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn
 COPY . .
-RUN yarn generate
+RUN yarn build
 
-FROM nginx:alpine
+CMD [ "yarn", "run", "start" ]
 
-WORKDIR /usr/share/nginx/html
-RUN rm -rf ./*
-COPY --from=build /app/dist ./
-
-CMD [ "nginx", "-g", "daemon off;" ]
+#COPY package.json yarn.lock ./
+#RUN yarn
+#COPY . .
+#RUN yarn generate
+#
+#FROM nginx:alpine
+#
+#WORKDIR /usr/share/nginx/html
+#RUN rm -rf ./*
+#COPY --from=build /app/dist ./
+#
+#CMD [ "nginx", "-g", "daemon off;" ]
