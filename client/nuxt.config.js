@@ -59,5 +59,10 @@ export default {
 
   env: {
     API_URL: process.env.API_URL || 'https://mock-api.test.ukrik.com/'
+  },
+
+  server: {
+    port: process.env.APP_PORT || 80,
+    host: '0.0.0.0'
   }
 }
